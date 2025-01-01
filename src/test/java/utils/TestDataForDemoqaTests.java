@@ -19,7 +19,7 @@ public class TestDataForDemoqaTests {
     public static String months = faker.options().option("December", "November", "January","February","March","April","May"
             ,"June", "July","August","September","October");
     public static String year =getRandomNumber(1924,2024);
-    public static String day =getRandomNumber(1,9);
+    public static String day =getRandomNumber(1,28);
     public static String state = faker.options().option("NCR", "Uttar Pradesh", "Haryana","Rajasthan");
     public static String city =getRandomCity(state);
     public static String picture =faker.options().option("lobster-07.jpg","tiger.png");
@@ -57,7 +57,7 @@ public class TestDataForDemoqaTests {
     }
     public static String getRandomNumber(int min,int max){
          int i =(ThreadLocalRandom.current().nextInt(min,max+1));
-         if(i<9){
+         if(i<10){
              String j = Integer.toString(i);
              String x = "0"+j;
              return x;
