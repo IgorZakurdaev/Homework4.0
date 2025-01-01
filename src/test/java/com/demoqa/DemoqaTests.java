@@ -1,34 +1,37 @@
 package com.demoqa;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.StudentRegistrationFormAsserts;
 
+import static utils.TestDataForDemoqaTests.*;
+
 public class DemoqaTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
     StudentRegistrationFormAsserts response = new StudentRegistrationFormAsserts();
+
 
     @Test
     @DisplayName("Проверка успешного сценария с максимальным количеством полей и маппинга в ответ сервиса")
     void studentRegistrationFormSuccessMaxTest() {
         registrationPage.openPage()
                 .removeBanners()
-                .setFirstName("Вася")
-                .setLastName("Пупкин")
-                .setEmail("vasyaPupkin@mail.ru")
-                .gender("Female")
-                .number("8979765432")
-                .dateOfBirth("11", "December", "1984")
-                .subjectsInput("History")
-                .hobbies("Sports")
-                .hobbies("Music")
-                .uploadPicture("lobster-07.jpg")
-                .address("Проспект танцующих слонов, 5")
-                .state("NCR")
-                .city("Delhi")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .gender(gender)
+                .number(number)
+                .dateOfBirth(day, months, year)
+                .subjectsInput(subjects)
+                .hobbies(hobbies)
+                .uploadPicture(picture)
+                .address(address)
+                .state(state)
+                .city(city)
                 .submit();
-        response.checkResultForMaxFields();
+         response.checkResultForMaxFields();
     }
 
     @Test
@@ -36,10 +39,10 @@ public class DemoqaTests extends TestBase {
     void studentRegistrationFormSuccessMinTest() {
         registrationPage.openPage()
                 .removeBanners()
-                .setFirstName("Вася")
-                .setLastName("Пупкин")
-                .gender("Female")
-                .number("8979765432")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .gender(gender)
+                .number(number)
                 .submit();
         response.checkResultForMinFields();
     }
@@ -48,9 +51,10 @@ public class DemoqaTests extends TestBase {
     @DisplayName("Проверка сценария с отправкой формы без обязательного параметра")
     void studentRegistrationFormWithoutRequiredParameter() {
         registrationPage.openPage()
-                .removeBanners()               .setLastName("Пупкин")
-                .gender("Female")
-                .number("8979765432")
+                .removeBanners()
+                .setLastName(lastName)
+                .gender(gender)
+                .number(number)
                 .submit();
         response.checkResultWithoutRequiredParameter();
     }
