@@ -1,10 +1,7 @@
-package pages.components;
+package com.demoqa.pages.components;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.files.DownloadActions.click;
-import static javax.management.Query.and;
 
 public class CalendarComponent {
     public void setDate(String day, String month, String year) {

@@ -1,7 +1,7 @@
-package pages;
+package com.demoqa.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.components.CalendarComponent;
+import com.demoqa.pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -41,9 +41,16 @@ public class RegistrationPage {
         return this;
     }
 
+    public SelenideElement getFirstNameInput() {
+        return firstNameInput;
+    }
+
     public RegistrationPage setLastName(String name) {
         lastNameInput.setValue(name);
         return this;
+    }
+    public SelenideElement getLastNameInput() {
+        return lastNameInput;
     }
 
     public RegistrationPage setEmail(String email) {
