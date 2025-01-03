@@ -19,10 +19,17 @@ public class TestData {
     public static String months = faker.options().option("December", "November", "January", "February", "March", "April", "May"
             , "June", "July", "August", "September", "October");
     public String year =String.valueOf(faker.number().numberBetween(1920,2024));
-    public String day = String.valueOf(faker.number().numberBetween(1,28));
+    public String day = getRandomNumber(1,28);
     public String state = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
     public String city = getRandomCity(state);
     public String picture = faker.options().option("lobster-07.jpg", "tiger.png");
+
+    public static void main(String[] args) {
+        String d = String.valueOf(faker.date().birthday(1,90));
+        System.out.println(d);
+
+
+    }
 
     public static String getRandomCity(String state) {
         switch (state) {
