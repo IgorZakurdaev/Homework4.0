@@ -10,7 +10,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class ResultTableComponent {
     TestData testData = new TestData();
     RegistrationPage registrationPage = new RegistrationPage();
-    public void checkResult(String name,String value) {
+
+    public void checkResult(String name, String value) {
         $(".table-responsive").$(byText(name)).parent().shouldHave((text(value)));
     }
 

@@ -49,6 +49,7 @@ public class RegistrationPage {
         lastNameInput.setValue(name);
         return this;
     }
+
     public SelenideElement getLastNameInput() {
         return lastNameInput;
     }

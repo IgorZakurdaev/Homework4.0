@@ -2,7 +2,12 @@ package com.demoqa.utils;
 
 import com.github.javafaker.Faker;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
+
 
 public class TestData {
     static Faker faker = new Faker();
@@ -16,35 +21,27 @@ public class TestData {
     public String hobbies = faker.options().option("Sports", "Reading", "Music");
     public String subjects = faker.options().option("English", "Chemistry", "Physics", "Commerce",
             "Social Studies", "Hindi", "Biology");
-    public static String months = faker.options().option("December", "November", "January", "February", "March", "April", "May"
-            , "June", "July", "August", "September", "October");
-    public String year =String.valueOf(faker.number().numberBetween(1920,2024));
-    public String day = getRandomNumber(1,28);
+    public String months;
+    public String year;
+    public String day;
     public String state = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
     public String city = getRandomCity(state);
     public String picture = faker.options().option("lobster-07.jpg", "tiger.png");
-
-    public static void main(String[] args) {
-        String d = String.valueOf(faker.date().birthday(1,90));
-        System.out.println(d);
-
-
-    }
 
     public static String getRandomCity(String state) {
         switch (state) {
             case ("NCR"):
                 String[] cityNCR = {"Delhi", "Gurgaon", "Noida"};
-                return getRandomItemFromArray(cityNCR);
+                return faker.options().option(cityNCR);
             case ("Uttar Pradesh"):
                 String[] cityUP = {"Agra", "Lucknow", "Merrut"};
-                return getRandomItemFromArray(cityUP);
+                return faker.options().option(cityUP);
             case ("Haryana"):
                 String[] cityHaryana = {"Karnal", "Panipat"};
-                return getRandomItemFromArray(cityHaryana);
+                return faker.options().option(cityHaryana);
             case ("Rajasthan"):
                 String[] cityRajasthan = {"Jaipur", "Jaiselmer"};
-                return getRandomItemFromArray(cityRajasthan);
+                return faker.options().option(cityRajasthan);
             default:
                 return null;
 
@@ -52,29 +49,21 @@ public class TestData {
         }
     }
 
+    public long randomTimestamp = ThreadLocalRandom.current().nextLong(
+            new Date(0).getTime(),
+            new Date().getTime());
 
-    public static String getRandomItemFromArray(String[] array) {
-        int index = getRandomInt(0, array.length - 1);
-        return array[index];
-
-    }
-
-    public static int getRandomInt(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(min, max + 1);
-
-    }
-
-    public static String getRandomNumber(int min, int max) {
-        int i = (ThreadLocalRandom.current().nextInt(min, max + 1));
-        if (i < 10) {
-            String j = Integer.toString(i);
-            String x = "0" + j;
-            return x;
-        }
-        String j = Integer.toString(i);
-        return j;
+    public TestData() {
+        DateFormat dayFormat = new SimpleDateFormat("dd", Locale.UK);
+        day = dayFormat.format(new Date(randomTimestamp));
+        DateFormat monthFormat = new SimpleDateFormat("MMMM", Locale.UK);
+        months = monthFormat.format(new Date(randomTimestamp));
+        DateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.UK);
+        year = yearFormat.format(new Date(randomTimestamp));
 
     }
-
 
 }
+
+
+
