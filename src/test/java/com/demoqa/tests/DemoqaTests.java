@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import com.demoqa.pages.RegistrationPage;
 import com.demoqa.pages.components.ResultTableComponent;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.*;
 
 
 public class DemoqaTests extends TestBase {
@@ -70,4 +72,44 @@ public class DemoqaTests extends TestBase {
         response.checkResultWithoutRequiredParameter();
     }
 
+    @ValueSource(strings = {"Male", "Female", "Other"})
+    @ParameterizedTest(name = "Проверка возможных значений параметра Gender = {0}")
+    void genderEnumTest(String gender) {
+        registrationPage.openPage()
+                .removeBanners()
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .gender(gender)
+                .number(testData.number)
+                .submit();
+        response.checkModalTitle();
+    }
+
+    @CsvFileSource(resources = "/test_data/StateAndCityEnum.csv")
+    @ParameterizedTest(name = "Проверка возможных значений параметров state={0} and city={1}")
+    void stateAndCityEnumTest(String state, String city) {
+        registrationPage.openPage()
+                .removeBanners()
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .gender(testData.gender)
+                .number(testData.number)
+                .state(state)
+                .city(city)
+                .submit();
+        response.checkModalTitle();
+    }
+
+    @ValueSource(strings = {"lobster-07.jpg", "tiger.png"})
+    @ParameterizedTest(name = "Проверка возможных типов загружаемых файлов")
+    void checkTypeOfUploadingFileTest(String picture) {
+        registrationPage.openPage()
+                .removeBanners()
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .gender(testData.gender)
+                .number(testData.number)
+                .uploadPicture(picture)
+                .submit();
+    }
 }
