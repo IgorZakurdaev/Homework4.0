@@ -111,5 +111,6 @@ public class DemoqaTests extends TestBase {
                 .number(testData.number)
                 .uploadPicture(picture)
                 .submit();
+        response.checkModalTitle();
     }
 }

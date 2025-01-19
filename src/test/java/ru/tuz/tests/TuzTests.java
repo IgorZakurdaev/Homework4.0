@@ -23,7 +23,7 @@ public class TuzTests   {
     }
     @EnumSource(Language.class)
     @ParameterizedTest
-    void CheckTitleTest(Language language){
+    void checkTitleTest(Language language){
         $(".lang").$(byText(language.name())).click();
         $(".main-page").shouldHave(text(language.description));
     }
